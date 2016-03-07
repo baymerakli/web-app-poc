@@ -1,0 +1,18 @@
+    <table>
+            <th>Dersler</th>
+        #foreach ($yil in $yillar)
+            <th>$yil</th>
+        #end
+        #foreach ($ders in $dersYilNotMap.keySet())
+                <tr>
+                    <td>$ders</td>
+                        #foreach ($yil in $yillar)
+                            <td>
+                                #if ($dersYilNotMap.get($ders).get($yil))
+                                    $dersYilNotMap.get($ders).get($yil)
+                                #end
+                            </td>
+                        #end
+                </tr>
+        #end
+    </table>

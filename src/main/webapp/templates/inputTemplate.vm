@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<html>
+<body>
+<form id="outputForm" action="/inputt" method="post">
+    <div id="main-panel">
+        <table>
+            #foreach ($ders in $dersler)
+                <th>$ders</th>
+            #end
+            #foreach ($ders in $dersler)
+                #foreach ($yil in $yillar)
+                        <tr>
+                            <td>$ders</td>
+                            <td>$yil</td>
+                            <td><input type="text" name="not:$ders:$yil"/></td>
+                        </tr>
+                #end
+            #end
+        </table>
+    </div>
+    <input type="submit" value="Submit" onclick="onSubmitFunc()">
+    <div id="result"></div>
+</form>
+<script>
+var onSubmitFunc = function(){
+    event.preventDefault();
+    var jqxhr = $.post( "/inputt", $( "#outputForm" ).serialize())
+            .done(function( data ) {
+                    $( "#result" ).empty().toggle(1000).append( data).toggle(1000);
+                })
+            .fail(function(error) {
+                console.log(error);
+                alert( "error" );
+            });
+};
+
+</script>
+</body>
+</html>
